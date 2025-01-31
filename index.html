@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paragon Public High School - Excellence in Education</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2ecc71;
+            --secondary-color: #27ae60;
+            --accent-color: #f39c12;
+            --text-color: #333333;
+            --bg-color: #f0f0f0;
+            --card-bg-color: #ffffff;
+            --header-text-color: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: var(--header-text-color);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        header:hover {
+            background-color: var(--secondary-color);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--header-text-color);
+            text-decoration: none;
+            transition: transform 0.3s ease;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .logo:hover {
+            transform: scale(1.1);
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 20px;
+        }
+
+        .nav-links a {
+            color: var(--header-text-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .menu-icon {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        .content h1{
+            padding-top: 100px;/*   aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa*/
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background-color: var(--primary-color);
+                flex-direction: column;
+                align-items: center;
+                padding: 1rem 0;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links li {
+                margin: 0.5rem 0;
+            }
+
+            .menu-icon {
+                display: block;
+            }
+        }
+
+        #hero {
+            background: linear-gradient(rgb(53 190 54 / 50%), rgb(100 58 59 / 50%)), url('https://via.placeholder.com/1600x900') no-repeat center center/cover;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--header-text-color);
+            position: relative;
+            overflow: hidden;
+            transition: background 0.5s ease;
+        }
+
+        #hero:hover {
+            background: linear-gradient(rgb(100 58 59 / 50%), rgb(53 190 54 / 50%)), url(https://via.placeholder.com/1600x900) no-repeat center center / cover;
+        }
+
+        #hero .content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            transition: transform 0.5s ease;
+        }
+
+        #hero:hover .content {
+            transform: scale(1.05);
+        }
+
+        #hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            opacity: 0;
+            transform: translateY(50px);
+            animation: fadeInUp 1s ease forwards 0.5s;
+            transition: color 0.3s ease;
+        }
+
+        #hero:hover h1 {
+            color: #fff;
+        }
+
+        #hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateY(50px);
+            animation: fadeInUp 1s ease forwards 0.7s;
+            transition: color 0.3s ease;
+        }
+
+        #hero:hover p {
+            color: #fff;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--accent-color);
+            color: var(--header-text-color);
+            padding: 0.75rem 1.5rem;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn:hover {
+            background: #e67e22;
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        section {
+            padding: 5rem 0;
+        }
+
+        section h2 {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background-color: var(--accent-color);
+        }
+
+        .about-content, .programs-content, .principles-content, .facilities-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+        }
+
+        .about-text, .programs-text, .principles-text, .facilities-text {
+            flex: 1;
+            min-width: 300px;
+            padding: 2rem;
+            background-color: var(--card-bg-color);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .about-text:hover, .programs-text:hover, .principles-text:hover, .facilities-text:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .about-image, .programs-image, .principles-image, .facilities-image {
+            flex: 1;
+            min-width: 300px;
+            padding: 1rem;
+        }
+
+        .about-image img, .programs-image img, .principles-image img, .facilities-image img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+        }
+
+        .about-image img:hover, .programs-image img:hover, .principles-image img:hover, .facilities-image img:hover {
+            transform: scale(1.05) rotate(2deg);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .gallery-item {
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1) rotate(3deg);
+        }
+
+        .gallery-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(46, 204, 113, 0.2), rgba(46, 204, 113, 0.8));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover::after {
+            opacity: 1;
+        }
+
+        #contact {
+            background-color: #f9f9f9;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: var(--card-bg-color);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .testimonials {
+            background-color: #f0f8f0;
+            padding: 5rem 0;
+        }
+
+        .testimonial-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .testimonial {
+            background-color: var(--card-bg-color);
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 1rem;
+            max-width: 350px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .testimonial:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .testimonial img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+            border: 3px solid var(--primary-color);
+        }
+
+        .news-events {
+            padding: 5rem 0;
+            background-color: #f9f9f9;
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .news-item {
+            background-color: var(--card-bg-color);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .news-item:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .news-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .news-content {
+            padding: 1.5rem;
+        }
+
+        .news-content h3 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        footer {
+            background-color: var(--primary-color);
+            color: var(--header-text-color);
+            padding: 3rem 0;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section {
+            margin: 1rem;
+            min-width: 200px;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section ul li a {
+            color: var(--header-text-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section ul li a:hover {
+            color: var(--accent-color);
+        }
+
+        .social-icons a {
+            color: var(--header-text-color);
+            font-size: 1.5rem;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: var(--accent-color);
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="#" class="logo">PPHS</a>
+            <div class="menu-icon">&#9776;</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#programs">Programs</a></li>
+                <li><a href="#principles">Principles</a></li>
+                <li><a href="#facilities">Headmaster</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#news">News & Events</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="hero">
+        <div class="content">
+            <h1>Welcome to Paragon Public High School</h1>
+            <p>Empowering Minds, Shaping Futures</p>
+            <a href="#contact" class="btn">Enroll Now</a>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <h2>About Us</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Paragon Public High School, established in 1970, is a beacon of educational excellence in our community. For over five decades, we have been committed to providing a nurturing and challenging educational environment that fosters intellectual curiosity, personal growth, and social responsibility.</p>
+                    <p>Our dedicated faculty, state-of-the-art facilities, and comprehensive curriculum ensure that every student receives the support they need to excel academically and personally. We pride ourselves on our ability to adapt to the changing needs of education while maintaining our core values and traditions.</p>
+                    <p>At Paragon, we believe in educating the whole child. Our approach goes beyond academic achievement to include character development, leadership skills, and community engagement. We strive to produce well-rounded individuals who are prepared to face the challenges of higher education and beyond.</p>
+                </div>
+                <div class="about-image">
+                    <img src="paragonPoster.jpg" alt="Paragon Public High School Building">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="programs">
+        <div class="container">
+            <h2>Our Programs</h2>
+            <div class="programs-content">
+                <div class="programs-image">
+                    <img src="PAragonPoster2.jpg" alt="Students in a science lab">
+                </div>
+                <div class="programs-text">
+                    <h3>Academic Excellence</h3>
+                    <p>Our comprehensive curriculum covers a wide range of subjects, ensuring students receive a well-rounded education. We offer:</p>
+                    <ul>
+                        <li>Advanced Placement (AP) courses in various subjects</li>
+                        <li>STEM-focused programs with hands-on learning experiences</li>
+                        <li>Language arts and literature studies</li>
+                        <li>Social sciences and cultural studies</li>
+                        <li>Fine arts and music programs</li>
+                    </ul>
+                    <h3>Extracurricular Activities</h3>
+                    <p>We believe in nurturing talents beyond academics. Our school offers:</p>
+                    <ul>
+                        <li>Sports teams in basketball, soccer, swimming, and track & field</li>
+                        <li>Debate and public speaking clubs</li>
+                        <li>Robotics and coding clubs</li>
+                        <li>Environmental and community service groups</li>
+                        <li>Drama and theater productions</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="principles">
+        <div class="container">
+            <h2>Our Guiding Principles</h2>
+            <div class="principles-content">
+                <div class="principles-text">
+                    <h3>Excellence</h3>
+                    <p>We strive for excellence in all aspects of education, encouraging our students to reach their highest potential in academics, arts, athletics, and personal growth.</p>
+                    
+                    <h3>Integrity</h3>
+                    <p>We foster a culture of honesty, ethics, and accountability, teaching our students the importance of moral character in all their endeavors.</p>
+                    
+                    <h3>Inclusivity</h3>
+                    <p>We celebrate diversity and create an inclusive environment where every student feels valued, respected, and supported.</p>
+                    
+                    <h3>Innovation</h3>
+                    <p>We embrace innovative teaching methods and technologies to prepare our students for the challenges of the 21st century.</p>
+                    
+                    <h3>Community</h3>
+                    <p>We believe in the power of community and encourage active participation in local and global initiatives to develop socially responsible citizens.</p>
+                </div>
+                <div class="principles-image">
+                    <img src="kids2.jpg" alt="Students collaborating on a project">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="facilities">
+        <div class="container">
+            <h2>Headmaster</h2>
+            <div class="facilities-content">
+                <div class="facilities-image">
+                    <img src="principal2.jpg" alt="Modern school library">
+                </div>
+                <div class="facilities-text">
+                    <p>
+                       <b> Dr. Waqar Abbas Bukhari </b>, the principal of the school, plays a crucial role in shaping the
+                         educational environment, acting as both an administrator and a leader. As the head of the
+                      institution, Dr. Bukhari is responsible for overseeing the day-to-day operations, ensuring
+                       that the school adheres to educational standards and policies. This includes managing 
+                       staff, budgeting, and ensuring that the resources needed for a quality education are
+                        available. Dr. Bukhari must also ensure that the school's curriculum meets the needs
+                         of the students while promoting a safe and inclusive atmosphere where both academic
+                          and personal growth are encouraged. Effective communication with teachers, students,
+                         and parents is vital in maintaining a positive and productive school community.
+                    </p>
+                    <p>
+                        A successful principal like Dr. Waqar Abbas Bukhari not only focuses on the academic
+                         progress of students but also plays a key role in fostering their social and emotional 
+                         development. By supporting extracurricular activities, creating opportunities for leadership,
+                          and establishing a culture of respect and discipline, Dr. Bukhari helps students thrive 
+                          beyond the classroom. The principal is often seen as a mentor and guide, supporting teachers
+                           in their professional growth and striving to implement new educational techniques and technologies
+                            that improve learning outcomes. Strong leadership, compassion, and an ability to adapt to the ever-changing
+                             demands of education are essential traits for Dr. Bukhari to inspire students, faculty, and the wider community.
+                    </p>
+                    
+                     </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery">
+        <div class="container">
+            <h2>School Gallery</h2>
+            <div class="gallery">
+                <div class="gallery-item">
+                    <img src="ph1.jpg" alt="Students in a classroom">
+                </div>
+                <div class="gallery-item">
+                    <img src="ph2.jpg" alt="School sports day">
+                </div>
+                <div class="gallery-item">
+                    <img src="ph3.jpg" alt="Science fair projects">
+                </div>
+                <div class="gallery-item">
+                    <img src="ph4.jpg" alt="Graduation ceremony">
+                </div>
+                <div class="gallery-item">
+                    <img src="ph7.jpg" alt="Art exhibition">
+                </div>
+                <div class="gallery-item">
+                    <img src="ph8.jpg" alt="Debate competition">           
+                </div>
+                <div class="gallery-item">
+                    <img src="ph9.jpg" alt="Art exhibition">
+                </div>
+                <div class="gallery-item">
+                    <img src="ph10.jpg" alt="Art exhibition">
+                </div>
+    </section>
+
+    <!-- <section id="testimonials" class="testimonials">
+        <div class="container">
+            <h2>What Our Community Says</h2>
+            <div class="testimonial-container">
+                <div class="testimonial">
+                    <img src="https://via.placeholder.com/80x80" alt="Parent">
+                    <p>"Paragon has provided my child with an exceptional education and countless opportunities for growth. The teachers are dedicated and truly care about each student's success."</p>
+                    <h4>- Sarah Johnson, Parent</h4>
+                </div>
+                <div class="testimonial">
+                    <img src="https://via.placeholder.com/80x80" alt="Student">
+                    <p>"I love being a student at Paragon. The challenging curriculum and supportive environment have helped me discover my passions and prepare for college."</p>
+                    <h4>- Michael Lee, Student</h4>
+                </div>
+                <div class="testimonial">
+                    <img src="https://via.placeholder.com/80x80" alt="Alumni">
+                    <p>"My years at Paragon laid the foundation for my success in university and beyond. The skills and values I learned here continue to guide me in my career."</p>
+                    <h4>- Emily Rodriguez, Alumni</h4>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+    <section id="news" class="news-events">
+        <div class="container">
+            <h2>News & Events</h2>
+            <div class="news-grid">
+                <div class="news-item">
+                    <img src="science.webp" alt="Science Fair">
+                    <div class="news-content">
+                        <h3>Annual Science Fair</h3>
+                        <p>Our students showcased their innovative projects at this year's science fair, impressing judges and visitors alike.</p>
+                        <a href="#" class="btn">Read More</a>
+                    </div>
+                </div>
+                <div class="news-item">
+                    <img src="sports.avif" alt="Sports Championship">
+                    <div class="news-content">
+                        <h3>Regional Sports Championship</h3>
+                        <p>Paragon's basketball team clinched the regional championship title in a thrilling final match.</p>
+                        <a href="#" class="btn">Read More</a>
+                    </div>
+                </div>
+                <div class="news-item">
+                    <img src="art.webp" alt="Art Exhibition">
+                    <div class="news-content">
+                        <h3>Student Art Exhibition</h3>
+                        <p>The annual art exhibition showcased the incredible talent and creativity of our students across various mediums.</p>
+                        <a href="#" class="btn">Read More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <h2>Contact Us</h2>
+            <form class="contact-form">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                   <p>
+                    Paragon Public High School
+                   </p>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                   <p>
+                    waqar.a.bukhari@gmail.com
+                    </p>
+                </div>
+                <div class="form-group">
+                    <label for="subject">Contact Number</label>
+                   <p>
+                    0300-9669121
+                   </p>
+                </div>
+               
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Information</h3>
+                    <p>123 Education Street</p>
+                    <p>Cityville, State 12345</p>
+                    <p>Phone: 0300-9669121</p>
+                    <p>Email: waqar.a.bukhari@gmail.com</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#programs">Programs</a></li>
+                        <li><a href="#principles">Principles</a></li>
+                        <li><a href="#facilities">Facilities</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Follow Us</h3>
+                    <div class="social-icons">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <p style="text-align: center; color: #fd9c00;">&copy; 2023 Paragon Public High School. All rights reserved.</p>
+        </div>
+    </footer>
+    <script>
+        const menuIcon = document.querySelector('.menu-icon');
+        const navLinks = document.querySelector('.nav-links');
+
+        menuIcon.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Close menu when a link is clicked
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+    </script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+</html>
+
